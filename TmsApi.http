@@ -1,0 +1,6 @@
+@Josi_TmsApi_HostAddress = http://localhost:5094
+
+GET {{Josi_TmsApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
