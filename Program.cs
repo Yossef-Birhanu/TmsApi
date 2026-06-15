@@ -1,63 +1,78 @@
-
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+// Services
 builder.Services.AddSingleton<EnrollmentWorker>();
 builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
-// ... your existing service registrations ...
-builder.Services.AddOpenApi(); // Required before MapOpenApi() will work
 
 builder.Services.AddControllers();
+builder.Services.AddOpenApi();
 
-//Addhost validation so the container catches illegal lifetime wiring early:
-
-builder.Host.UseDefaultServiceProvider(options =>
-{
-options.ValidateScopes = true;
-options.ValidateOnBuild = true;
-});
-
-// 1. REGISTER SCHEMES AND SERVICES IN THE DI CONTAINER FIRST (Fixes the crash)
+// Authentication & Authorization
 builder.Services.AddAuthentication("TrainingScheme")
     .AddScheme<AuthenticationSchemeOptions, TrainingAuthHandler>("TrainingScheme", null);
 
-builder.Services.AddAuthorization(); // REQUIRED: Populates the underlying engine
+builder.Services.AddAuthorization();
+
+// Host validation
+builder.Host.UseDefaultServiceProvider(options =>
+{
+    options.ValidateScopes = true;
+    options.ValidateOnBuild = true;
+});
 
 var app = builder.Build();
 
-// 2. CONFIGURE THE MIDDLEWARE PIPELINE IN THE CORRECT ORDER
+// Middleware order
 app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
 
-app.UseAuthentication(); // Must come BEFORE Authorization
-app.UseAuthorization();  // Verified safely now because services are registered above
+// ===== ENDPOINTS =====
 
-// 3. MAP SECURED ENDPOINTS AFTER SECURITY MIDDLEWARE
+// secured endpoint
 app.MapGet("/api/assessments/results", () => Results.Ok(new
 {
     courseCode = "CS-101",
     studentId = "S-001",
     letterGrade = "A"
-})).RequireAuthorization(); // Enforces the custom header validation gate securely
+})).RequireAuthorization();
 
+// controllers
+app.MapControllers();
 
- app.MapControllers();
-
-app.Run();
-
-
+// worker endpoint
 app.MapGet("/api/enrollments/worker-smoke", (EnrollmentWorker worker) =>
 {
-worker.ProcessBatch();
-return Results.Ok("processed");
+    worker.ProcessBatch();
+    return Results.Ok("processed");
 });
 
+// error test endpoint
 app.MapGet("/api/error", () =>
 {
-throw new TmsDatabaseException(" Simulated database failure for ProblemDetails testing");
+    throw new TmsDatabaseException("Simulated database failure for ProblemDetails testing");
 });
+
+// TODO1
+if (app.Environment.IsDevelopment())
+{
+    Console.WriteLine("Development mode");
+}
+
+// TODO2
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    app.MapScalarApiReference();
+}
+
+// TODO3
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler();
+}
+
+app.Run(); // MUST BE LAST

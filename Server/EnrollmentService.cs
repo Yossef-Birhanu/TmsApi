@@ -29,7 +29,7 @@ public class EnrollmentService : IEnrollmentService
 
         var id = Guid.NewGuid().ToString("N")[..8];
 
-        var record = new EnrollmentRecord(
+        var record = new EnrollmentRecord(          
             id,
             studentId,
             courseCode,
@@ -110,8 +110,5 @@ public class EnrollmentRecord(string id, string studentId, string courseCode, Da
 }
 
 
-public class TmsDatabaseException(string message) : Exception(message);
-
-//Then wire the test route in Program.cs:
 
 
