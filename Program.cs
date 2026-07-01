@@ -3,14 +3,13 @@ using Scalar.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Josi_TmsApi.Data;
 using Josi_TmsApi.Entities;
+using Josi_TmsApi.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Services
 builder.Services.AddSingleton<EnrollmentWorker>();
 builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
-
-builder.Services.AddControllers();
-builder.Services.AddOpenApi();
+builder.Services.AddScoped<ICourseService, CourseService>();
 
 // Authentication & Authorization
 builder.Services.AddAuthentication("TrainingScheme")
@@ -18,6 +17,9 @@ builder.Services.AddAuthentication("TrainingScheme")
 
 //Services are registered in the DBContext, so we can use THIS CODE
  // Register TmsDbContext scoped for incoming HTTP requests
+
+ builder.Services.AddProblemDetails();
+ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<TmsDb1Context>(options =>
 options.UseNpgsql(builder.Configuration.GetConnectionString("TmsDatabase")));
 
@@ -25,7 +27,8 @@ builder.Services.AddDbContext<TmsDb1Context>(options =>
 options.UseNpgsql(builder.Configuration.GetConnectionString("TmsDatabase"))
 .LogTo(Console.WriteLine, LogLevel.Information) // Log SQLto output window
 .EnableSensitiveDataLogging()); // Show parameters in querylogs (dev only)
-
+ 
+builder.Services.AddControllers();
 builder.Services.AddAuthorization();
 
 // Host validation
@@ -100,14 +103,17 @@ new() { RegistrationNumber = "TMS-2026-0001", Name = "AliceSmith", GPA = 3.8m, I
 new() { RegistrationNumber = "TMS-2026-0002", Name = "BobJones", GPA = 2.9m, IsActive = true },
 new() { RegistrationNumber = "TMS-2026-0003", Name = "Charlie Brown", GPA = 3.4m, IsActive = false },
 new() { RegistrationNumber = "TMS-2026-0004", Name = "DianaPrince", GPA = 3.9m, IsActive = true },
-new() { RegistrationNumber = "TMS-2026-0005", Name = "EvanWright", GPA = 2.5m, IsActive = true }
+new() { RegistrationNumber = "TMS-2026-0005", Name = "EvanWright", GPA = 2.5m, IsActive = true },
+new() { RegistrationNumber = "TMS-2026-0006", Name = "Yossef C", GPA = 3.7m, IsActive = true },
+new() { RegistrationNumber = "TMS-2026-0007", Name = "Yossef B", GPA = 3.8m, IsActive = true },
+new() { RegistrationNumber = "TMS-2026-0008", Name = "Yosef Bir", GPA = 3.8m, IsActive = true }
 };
 context.Students.AddRange(students);
 var courses = new List<Course>
 {
-new() { Code = "CS-101", Title = "Introduction to ComputerScience", Capacity = 30 },
-new() { Code = "CS-201", Title = "Data Structures and Algorithms", Capacity = 25 },
-new() { Code = "MAT-101", Title = "Calculus I", Capacity=40 }
+new() { Code = "CS-101", Title = "Introduction to ComputerScience", MaxCapacity = 30 },
+new() { Code = "CS-201", Title = "Data Structures and Algorithms", MaxCapacity = 25 },
+new() { Code = "MAT-101", Title = "Calculus I", MaxCapacity=40 }
 };
 context.Courses.AddRange(courses);
 context.SaveChanges();

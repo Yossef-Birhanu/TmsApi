@@ -1,4 +1,6 @@
 namespace Josi_TmsApi.Entities;
+
+
 public class Course
 {
     public int Id { get; set; }
@@ -6,9 +8,13 @@ public class Course
     public required string Code { get; set; }
     //natural key -human readable,(uniquess configured in session  2)
     public required string Title { get; set; }
-    public int Capacity { get; set; }
+    public int MaxCapacity { get; set; }
     //navigation property many to many relationship
-    public ICollection <Enrollment> Enrollments { get; set; } = new List<Enrollment>();
+   // public ICollection <Enrollment> Enrollments { get; set; } = new List<Enrollment>();
+   public ICollection <Enrollment> Enrollments {get; set;}=[];
+
+   //Confirm that Course configuration has the rules for both properties configured
+   
     public ICollection <Assessment> Assessments { get; set; } = new List<Assessment>();
     public ICollection <Certificate> Certificates{ get; set; } = new List<Certificate>();
 }

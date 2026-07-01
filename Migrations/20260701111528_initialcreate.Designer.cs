@@ -3,17 +3,20 @@ using System;
 using Josi_TmsApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Josi_TmsApi.Migrations
+namespace TmsApi.Migrations
 {
     [DbContext(typeof(TmsDb1Context))]
-    partial class TmsDb1ContextModelSnapshot : ModelSnapshot
+    [Migration("20260701111528_initialcreate")]
+    partial class initialcreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +50,7 @@ namespace Josi_TmsApi.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Assessment");
+                    b.ToTable("Assessments");
                 });
 
             modelBuilder.Entity("Josi_TmsApi.Entities.Certificate", b =>
@@ -77,7 +80,7 @@ namespace Josi_TmsApi.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Certificate");
+                    b.ToTable("Certificates");
                 });
 
             modelBuilder.Entity("Josi_TmsApi.Entities.Course", b =>
@@ -88,12 +91,12 @@ namespace Josi_TmsApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Capacity")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("MaxCapacity")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Title")
                         .IsRequired()
