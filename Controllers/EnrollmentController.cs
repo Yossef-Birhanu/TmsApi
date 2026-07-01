@@ -51,12 +51,18 @@ namespace Josi_TmsApi.Controllers;
 [Route("api/courses/{courseId:int}/enrollments")]
 public class EnrollmentsController : ControllerBase
 {
+<<<<<<< HEAD
     private readonly ICourseService courseService;
     private readonly IEnrollmentService enrollmentService;
 
     public EnrollmentsController(
         ICourseService courseService,
         IEnrollmentService enrollmentService)
+=======
+    //Get/api/enrollments returns all enrollments records
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+>>>>>>> 1b8179c2f051a626319abdf900df189def4834c2
     {
         this.courseService = courseService;
         this.enrollmentService = enrollmentService;
