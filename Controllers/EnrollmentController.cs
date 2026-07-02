@@ -5,7 +5,7 @@ public class EnrollmentController(IEnrollmentService enrollmentService) : Contro
 {
     //Get/api/enrollments returns all enrollments records
     [HttpGet]
-    public async Task<IActionResult>GetAll()
+    public async Task<IActionResult> GetAll()
     {
         var enrollments = await enrollmentService.GetAllAsync();
         return Ok(enrollments);
