@@ -1,6 +1,7 @@
 using System.Diagnostics.Eventing.Reader;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Tms.Api.Services;
 public class EnrollmentWorker
 {
     private readonly IServiceScopeFactory _scopeFactory;
