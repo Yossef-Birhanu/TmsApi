@@ -3,6 +3,7 @@ using System;
 using Josi_TmsApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TmsApi.Migrations
 {
     [DbContext(typeof(TmsDb1Context))]
-    partial class TmsDb1ContextModelSnapshot : ModelSnapshot
+    [Migration("20260624135846_AddAssessmentsAndCertificates")]
+    partial class AddAssessmentsAndCertificates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,31 +91,13 @@ namespace TmsApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
                     b.Property<int>("Capacity")
                         .HasColumnType("integer");
 
->>>>>>> 1b8179c2f051a626319abdf900df189def4834c2
-=======
-                    b.Property<int>("Capacity")
-                        .HasColumnType("integer");
-
->>>>>>> 70789a3ac36423b19b24234c54947951ff4298e8
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnType("text");
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    b.Property<int>("MaxCapacity")
-                        .HasColumnType("integer");
-
-=======
->>>>>>> 1b8179c2f051a626319abdf900df189def4834c2
-=======
->>>>>>> 70789a3ac36423b19b24234c54947951ff4298e8
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");

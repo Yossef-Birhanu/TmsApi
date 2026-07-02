@@ -1,21 +1,30 @@
 using Microsoft.AspNetCore.Mvc;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 70789a3ac36423b19b24234c54947951ff4298e8
 using Microsoft.EntityFrameworkCore;
 using Josi_TmsApi.Data;
 
 namespace TmsApi.Controllers;
 
+<<<<<<< HEAD
 =======
 using System;
 using System.Linq;
 using Josi_TmsApi.Data;
 namespace TmsApi.Controllers;
 >>>>>>> 1b8179c2f051a626319abdf900df189def4834c2
+=======
+>>>>>>> 70789a3ac36423b19b24234c54947951ff4298e8
 [ApiController]
 [Route("api/test")]
 public class TestController(TmsDb1Context context) : ControllerBase
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 70789a3ac36423b19b24234c54947951ff4298e8
     [HttpGet("deferred")]
     public IActionResult TestDeferred()
     {
@@ -107,6 +116,7 @@ public class TestController(TmsDb1Context context) : ControllerBase
     }
 }
 
+<<<<<<< HEAD
 =======
 [HttpGet("deferred")]
 public IActionResult TestDeferred()
@@ -148,3 +158,5 @@ Console.WriteLine($">>> EXCEPTION CAUGHT: {ex.Message}\n");return BadRequest(new
 
 
 >>>>>>> 1b8179c2f051a626319abdf900df189def4834c2
+=======
+>>>>>>> 70789a3ac36423b19b24234c54947951ff4298e8

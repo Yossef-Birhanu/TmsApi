@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace TmsApi.Migrations
+namespace Josi_TmsApi.Migrations
 {
     [DbContext(typeof(TmsDb1Context))]
     partial class TmsDb1ContextModelSnapshot : ModelSnapshot
@@ -47,7 +47,7 @@ namespace TmsApi.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.ToTable("Assessments");
+                    b.ToTable("Assessment");
                 });
 
             modelBuilder.Entity("Josi_TmsApi.Entities.Certificate", b =>
@@ -77,7 +77,7 @@ namespace TmsApi.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Certificates");
+                    b.ToTable("Certificate");
                 });
 
             modelBuilder.Entity("Josi_TmsApi.Entities.Course", b =>
@@ -88,31 +88,13 @@ namespace TmsApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
                     b.Property<int>("Capacity")
                         .HasColumnType("integer");
 
->>>>>>> 1b8179c2f051a626319abdf900df189def4834c2
-=======
-                    b.Property<int>("Capacity")
-                        .HasColumnType("integer");
-
->>>>>>> 70789a3ac36423b19b24234c54947951ff4298e8
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnType("text");
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    b.Property<int>("MaxCapacity")
-                        .HasColumnType("integer");
-
-=======
->>>>>>> 1b8179c2f051a626319abdf900df189def4834c2
-=======
->>>>>>> 70789a3ac36423b19b24234c54947951ff4298e8
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");

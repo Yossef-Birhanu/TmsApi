@@ -65,7 +65,10 @@ public class EnrollmentsController(
     //Get/api/enrollments returns all enrollments records
     [HttpGet]
     public async Task<IActionResult> GetAll()
+<<<<<<< HEAD
 >>>>>>> 1b8179c2f051a626319abdf900df189def4834c2
+=======
+>>>>>>> 70789a3ac36423b19b24234c54947951ff4298e8
     {
         var enrollment = await enrollmentService.GetByIdAsync(
             courseId,

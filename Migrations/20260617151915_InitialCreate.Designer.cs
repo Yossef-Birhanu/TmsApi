@@ -3,17 +3,20 @@ using System;
 using Josi_TmsApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace TmsApi.Migrations
+namespace Josi_TmsApi.Migrations
 {
     [DbContext(typeof(TmsDb1Context))]
-    partial class TmsDb1ContextModelSnapshot : ModelSnapshot
+    [Migration("20260617151915_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,64 +24,6 @@ namespace TmsApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("Josi_TmsApi.Entities.Assessment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("integer");
-
-                    b.Property<decimal>("MaxScore")
-                        .HasColumnType("numeric");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("Weight")
-                        .HasColumnType("numeric");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.ToTable("Assessments");
-                });
-
-            modelBuilder.Entity("Josi_TmsApi.Entities.Certificate", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CourseId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("IssuedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("SerialNumber")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Certificates");
-                });
 
             modelBuilder.Entity("Josi_TmsApi.Entities.Course", b =>
                 {
@@ -88,31 +33,13 @@ namespace TmsApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
                     b.Property<int>("Capacity")
                         .HasColumnType("integer");
 
->>>>>>> 1b8179c2f051a626319abdf900df189def4834c2
-=======
-                    b.Property<int>("Capacity")
-                        .HasColumnType("integer");
-
->>>>>>> 70789a3ac36423b19b24234c54947951ff4298e8
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnType("text");
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    b.Property<int>("MaxCapacity")
-                        .HasColumnType("integer");
-
-=======
->>>>>>> 1b8179c2f051a626319abdf900df189def4834c2
-=======
->>>>>>> 70789a3ac36423b19b24234c54947951ff4298e8
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
@@ -178,36 +105,6 @@ namespace TmsApi.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("Josi_TmsApi.Entities.Assessment", b =>
-                {
-                    b.HasOne("Josi_TmsApi.Entities.Course", "Course")
-                        .WithMany("Assessments")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-                });
-
-            modelBuilder.Entity("Josi_TmsApi.Entities.Certificate", b =>
-                {
-                    b.HasOne("Josi_TmsApi.Entities.Course", "Course")
-                        .WithMany("Certificates")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Josi_TmsApi.Entities.Student", "Student")
-                        .WithMany("Certificates")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Course");
-
-                    b.Navigation("Student");
-                });
-
             modelBuilder.Entity("Josi_TmsApi.Entities.Enrollment", b =>
                 {
                     b.HasOne("Josi_TmsApi.Entities.Course", "Course")
@@ -229,17 +126,11 @@ namespace TmsApi.Migrations
 
             modelBuilder.Entity("Josi_TmsApi.Entities.Course", b =>
                 {
-                    b.Navigation("Assessments");
-
-                    b.Navigation("Certificates");
-
                     b.Navigation("Enrollments");
                 });
 
             modelBuilder.Entity("Josi_TmsApi.Entities.Student", b =>
                 {
-                    b.Navigation("Certificates");
-
                     b.Navigation("Enrollments");
                 });
 #pragma warning restore 612, 618

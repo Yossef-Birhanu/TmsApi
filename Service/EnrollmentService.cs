@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 // public class EnrollmentService : IEnrollmentService
 // {
 //     private readonly Dictionary<string, EnrollmentRecord> _store = new();
@@ -167,6 +168,8 @@ public class EnrollmentService(
     }
 }
 =======
+=======
+>>>>>>> 70789a3ac36423b19b24234c54947951ff4298e8
 public class EnrollmentService : IEnrollmentService
 {
     private readonly Dictionary<string, EnrollmentRecord> _store = new();
@@ -281,4 +284,7 @@ public class EnrollmentRecord(string id, string studentId, string courseCode, Da
 
 
 
+<<<<<<< HEAD
 >>>>>>> 1b8179c2f051a626319abdf900df189def4834c2
+=======
+>>>>>>> 70789a3ac36423b19b24234c54947951ff4298e8

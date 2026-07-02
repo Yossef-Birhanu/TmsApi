@@ -7,10 +7,14 @@ public class Course
     //natural key -human readable,(uniquess configured in session  2)
     public required string Title { get; set; }
 <<<<<<< HEAD
+<<<<<<< HEAD
     public int MaxCapacity { get; set; }
 =======
     public int Capacity { get; set; }
 >>>>>>> 1b8179c2f051a626319abdf900df189def4834c2
+=======
+    public int Capacity { get; set; }
+>>>>>>> 70789a3ac36423b19b24234c54947951ff4298e8
     //navigation property many to many relationship
     public ICollection <Enrollment> Enrollments { get; set; } = new List<Enrollment>();
     public ICollection <Assessment> Assessments { get; set; } = new List<Assessment>();
