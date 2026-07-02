@@ -9,5 +9,9 @@ public DbSet<Enrollment> Enrollments => Set<Enrollment>();
 
 public DbSet<Assessment> Assessments => Set<Assessment>();
 public DbSet<Certificate> Certificates => Set<Certificate>();
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> 1b8179c2f051a626319abdf900df189def4834c2

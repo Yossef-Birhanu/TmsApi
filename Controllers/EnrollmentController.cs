@@ -55,11 +55,17 @@ public class EnrollmentsController(
     ICourseService courseService,
     IEnrollmentService enrollmentService) : ControllerBase
 {
+<<<<<<< HEAD
     [HttpGet("{id:int}", Name = nameof(GetEnrollment))]
     public async Task<IActionResult> GetEnrollment(
         int courseId,
         int id,
         CancellationToken ct)
+=======
+    //Get/api/enrollments returns all enrollments records
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+>>>>>>> 1b8179c2f051a626319abdf900df189def4834c2
     {
         var enrollment = await enrollmentService.GetByIdAsync(
             courseId,
