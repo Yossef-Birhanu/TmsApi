@@ -3,15 +3,20 @@ using Scalar.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Josi_TmsApi.Data;
 using Josi_TmsApi.Entities;
+using Josi_TmsApi.Services;
+using Asp.Versioning;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Services
 builder.Services.AddSingleton<EnrollmentWorker>();
 builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
+builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddScoped<IStudentService, StudentService>();
 
+builder.Services.AddProblemDetails();
+//builder.Services.AddOpenApi();
 builder.Services.AddControllers();
-builder.Services.AddOpenApi();
-
 // Authentication & Authorization
 builder.Services.AddAuthentication("TrainingScheme")
     .AddScheme<AuthenticationSchemeOptions, TrainingAuthHandler>("TrainingScheme", null);
@@ -25,8 +30,31 @@ builder.Services.AddDbContext<TmsDb1Context>(options =>
 options.UseNpgsql(builder.Configuration.GetConnectionString("TmsDatabase"))
 .LogTo(Console.WriteLine, LogLevel.Information) // Log SQLto output window
 .EnableSensitiveDataLogging()); // Show parameters in querylogs (dev only)
+builder.Services.AddOpenApi(documentName:"v1", configureOptions: options =>
+{
+    options.ShouldInclude=description=>description.GroupName=="v1";
+});
+builder.Services.AddOpenApi(documentName:"v2", configureOptions: options =>
+{
+    options.ShouldInclude=description=>description.GroupName=="v2";
+});
+
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new ApiVersion(1,0);
+    options.AssumeDefaultVersionWhenUnspecified= true;
+    options.ReportApiVersions= true;
+    options.ApiVersionReader=new UrlSegmentApiVersionReader();
+    
+})
+.AddApiExplorer(options =>
+{
+    options.GroupNameFormat="'v'vvv";
+    options.SubstituteApiVersionInUrl=true;
+});
 
 builder.Services.AddAuthorization();
+
 
 // Host validation
 builder.Host.UseDefaultServiceProvider(options =>
@@ -41,6 +69,8 @@ var app = builder.Build();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseExceptionHandler();
+app.UseStatusCodePages();
 
 // ===== ENDPOINTS =====
 
@@ -72,13 +102,27 @@ app.MapGet("/api/error", () =>
 if (app.Environment.IsDevelopment())
 {
     Console.WriteLine("Development mode");
+
 }
+
+//update your scalar config
+app.MapScalarApiReference(options =>
+{
+    options.WithTitle("TMS API Reference").WithTheme(ScalarTheme.DeepSpace).WithDefaultHttpClient(ScalarTarget.CSharp,ScalarClient.HttpClient);
+    //Tell scalar to pull both documents into its sidebar dropdown
+    options
+          .AddDocument("v1","API Version 1.0")
+          .AddDocument("v2","API Version 2.0");
+});
 
 // TODO2
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.MapScalarApiReference();
+   // app.MapScalarApiReference();
+    using var scope = app.Services.CreateScope();
+    var context = scope.ServiceProvider.GetRequiredService<TmsDb1Context>();
+    await DataSeeder.SeedAsync(context);
 }
 
 // TODO3
@@ -91,6 +135,7 @@ if (!app.Environment.IsDevelopment())
 using (var scope = app.Services.CreateScope())
 {
   var context =scope.ServiceProvider.GetRequiredService<TmsDb1Context>();
+  context.Database.EnsureCreated();
   context.Database.Migrate(); // Apply any pending migrations migration history intact
   if (!context.Students.Any())
 {
@@ -108,9 +153,9 @@ new() { RegistrationNumber = "TMS-2026-0008", Name = "Yosef Bir", GPA = 3.8m, Is
 context.Students.AddRange(students);
 var courses = new List<Course>
 {
-new() { Code = "CS-101", Title = "Introduction to ComputerScience", Capacity = 30 },
-new() { Code = "CS-201", Title = "Data Structures and Algorithms", Capacity = 25 },
-new() { Code = "MAT-101", Title = "Calculus I", Capacity=40 }
+new() { Code = "CS-101", Title = "Introduction to ComputerScience", MaxCapacity = 30 },
+new() { Code = "CS-201", Title = "Data Structures and Algorithms", MaxCapacity = 25 },
+new() { Code = "MAT-101", Title = "Calculus I", MaxCapacity=40 }
 };
 context.Courses.AddRange(courses);
 context.SaveChanges();

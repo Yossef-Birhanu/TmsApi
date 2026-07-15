@@ -4,3 +4,5 @@ GET {{Josi_TmsApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+GET {{{{Josi_TmsApi_HostAddress}}}/api/courses/1
+Accept: application/json
