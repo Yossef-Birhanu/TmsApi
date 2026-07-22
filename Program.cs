@@ -5,6 +5,7 @@ using Josi_TmsApi.Data;
 using Josi_TmsApi.Entities;
 using Josi_TmsApi.Services;
 using Asp.Versioning;
+using Josi_TmsApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -81,6 +82,8 @@ app.MapGet("/api/assessments/results", () => Results.Ok(new
     studentId = "S-001",
     letterGrade = "A"
 })).RequireAuthorization();
+
+app.UseMiddleware<V1DeprecationMiddleware>();
 
 // controllers
 app.MapControllers();
