@@ -1,0 +1,7 @@
+namespace TmsApi.Application.DTOs;
+public record StudentResponseDto(
+    int Id,
+    string RegistrationNumber,
+    string Name,
+    int EnrollmentCount
+);

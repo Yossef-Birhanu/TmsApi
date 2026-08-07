@@ -1,0 +1,105 @@
+<!--
+  ============================================================
+  INSTRUCTOR COMMAND CENTER
+  ============================================================
+  This section renders immediately.
+  It does not wait for the analytics chart.
+-->
+
+<div class="dashboard-header">
+
+  <h1>Instructor Command Center</h1>
+
+  <div class="kpi-row">
+
+    <!-- Total enrollment count -->
+    <div class="kpi-card">
+      <span class="kpi-value">
+        {{ store.entities().length }}
+      </span>
+
+      <span class="kpi-label">
+        Total Enrollments
+      </span>
+    </div>
+
+    <!-- Pending enrollment count -->
+    <div class="kpi-card pending">
+      <span class="kpi-value">
+        {{ store.pendingCount() }}
+      </span>
+
+      <span class="kpi-label">
+        Pending Approval
+      </span>
+    </div>
+
+  </div>
+</div>
+
+
+<!--
+  ============================================================
+  DEFERRED ANALYTICS CHART
+  ============================================================
+  The analytics chart is NOT downloaded immediately.
+
+  on viewport:
+  The chart is loaded when this section becomes visible
+  in the browser viewport.
+
+  prefetch on idle:
+  Angular can download the deferred chunk while the browser
+  is idle, so it may be ready before the user scrolls to it.
+-->
+
+<div class="chart-section">
+
+  @defer (on viewport; prefetch on idle) {
+
+    <!--
+      Heavy analytics component.
+      It is loaded as a separate JavaScript chunk.
+    -->
+    <tms-analytics-chart
+      [data]="store.entities()">
+    </tms-analytics-chart>
+
+  }
+
+  @placeholder {
+
+    <!--
+      Displayed before the deferred component is loaded.
+    -->
+    <div class="skeleton-chart">
+      Scroll down to view analytics...
+    </div>
+
+  }
+
+  @loading (minimum 500ms) {
+
+    <!--
+      Displayed while Angular downloads the deferred chunk.
+    -->
+    <div class="spinner">
+      Downloading chart engine...
+    </div>
+
+  }
+
+  @error {
+
+    <!--
+      Displayed if the deferred component fails to load.
+    -->
+    <p>
+      Failed to load chart. Check your connection.
+    </p>
+
+  }
+
+</div>
+
+

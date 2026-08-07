@@ -1,0 +1,235 @@
+// ========================================
+// Student Dashboard
+// ========================================
+
+:host {
+  display: block;
+  min-height: 100vh;
+  padding: 40px;
+  background: #f4f6f8;
+  font-family: Arial, sans-serif;
+}
+
+// ========================================
+// Dashboard / Course Catalog Heading
+// ========================================
+
+h2 {
+  margin: 0 0 25px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+// ========================================
+// Student Information Card
+// ========================================
+
+.student-info {
+  max-width: 500px;
+  padding: 25px;
+  margin-bottom: 30px;
+
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+
+    font-size: 22px;
+    color: #374151;
+  }
+
+  p {
+    margin: 12px 0;
+    padding: 10px 0;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    font-size: 17px;
+    color: #4b5563;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    strong {
+      display: inline-block;
+      min-width: 150px;
+
+      color: #111827;
+    }
+  }
+}
+
+// ========================================
+// Register Button
+// ========================================
+
+button {
+  margin-top: 20px;
+  padding: 12px 22px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #2563eb;
+  color: #ffffff;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// ========================================
+// Loading Message
+// ========================================
+
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 180px;
+  padding: 24px;
+
+  border: 1px solid #dbeafe;
+  border-radius: 12px;
+
+  background-color: #eff6ff;
+  color: #2563eb;
+
+  font-size: 16px;
+  font-weight: 500;
+}
+
+// ========================================
+// Loading Animation
+// ========================================
+
+.spinner::before {
+  content: "";
+
+  width: 20px;
+  height: 20px;
+
+  margin-right: 12px;
+
+  border: 3px solid #bfdbfe;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+
+  animation: spin 0.8s linear infinite;
+}
+
+// ========================================
+// Error Message
+// ========================================
+
+.error {
+  padding: 18px 20px;
+
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+
+  background-color: #fef2f2;
+  color: #b91c1c;
+
+  font-size: 15px;
+  font-weight: 500;
+}
+
+// ========================================
+// Course Grid
+// ========================================
+
+.grid {
+  display: grid;
+
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(280px, 1fr)
+  );
+
+  gap: 24px;
+
+  width: 100%;
+}
+
+// ========================================
+// Empty Course Message
+// ========================================
+
+.grid > p {
+  grid-column: 1 / -1;
+
+  padding: 40px 20px;
+
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+
+  background-color: #f8fafc;
+
+  color: #64748b;
+
+  text-align: center;
+  font-size: 16px;
+}
+
+// ========================================
+// Loading Spinner Animation
+// ========================================
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ========================================
+// Responsive Design
+// ========================================
+
+@media (max-width: 768px) {
+  :host {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .student-info {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .student-info p strong {
+    min-width: 120px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

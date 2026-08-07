@@ -1,0 +1,202 @@
+/* Make width and padding behave predictably */
+* {
+  box-sizing: border-box;
+}
+
+/* Main page container */
+:host {
+  display: block;
+  min-height: 100vh;
+  padding: 30px 20px;
+  background: #f5f7fa;
+}
+
+/* Form title */
+h2 {
+  max-width: 800px;
+  margin: 0 auto 25px;
+  font-size: 28px;
+}
+
+/* Form container */
+form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Labels */
+label {
+  display: block;
+  margin-bottom: 7px;
+  font-weight: 600;
+}
+
+/* Text inputs and textarea */
+input,
+textarea {
+  width: 100%;
+  padding: 11px 12px;
+  margin-bottom: 18px;
+
+  border: 1px solid #ccc;
+  border-radius: 6px;
+
+  font-size: 15px;
+  font-family: inherit;
+
+  outline: none;
+}
+
+/* When the user clicks an input */
+input:focus,
+textarea:focus {
+  border-color: #4f46e5;
+}
+
+/* Textarea */
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Error messages */
+.error {
+  display: block;
+  margin-top: -12px;
+  margin-bottom: 15px;
+
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Backup section */
+h3 {
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+/* Each backup course row */
+.backup-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* Input inside backup row */
+.backup-row input {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+/* General buttons */
+button {
+  padding: 10px 16px;
+
+  border: none;
+  border-radius: 6px;
+
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Add Backup button */
+button[type="button"] {
+  margin-top: 5px;
+}
+
+/* Remove button */
+.backup-row button {
+  flex-shrink: 0;
+}
+
+/* Horizontal line */
+hr {
+  margin: 25px 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+/* Submit button */
+button[type="submit"] {
+  width: 100%;
+  margin-top: 5px;
+}
+
+/* Disabled submit button */
+button[type="submit"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Success message */
+.success {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+
+  border-radius: 8px;
+
+  font-weight: 600;
+}
+
+/* ============================= */
+/* TABLET */
+/* ============================= */
+
+@media (max-width: 768px) {
+  :host {
+    padding: 20px 15px;
+  }
+
+  form {
+    padding: 25px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+}
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
+@media (max-width: 480px) {
+  :host {
+    padding: 15px 10px;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  form {
+    padding: 18px;
+    border-radius: 8px;
+  }
+
+  input,
+  textarea {
+    font-size: 16px;
+  }
+
+  /* Stack backup input and remove button */
+  .backup-row {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .backup-row button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
