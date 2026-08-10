@@ -5,8 +5,8 @@ using TmsApi.Application.Courses.Commands;
 using TmsApi.Application.DTOs;
 using TmsApi.Application.Interfaces;
 using TmsApi.Domain.Entities;
-using TmsApi.Infrastructure.Persistence;
-namespace JTmsApi.Infrastructure.Persistence;
+
+namespace TmsApi.Infrastructure.Persistence;
 public class CourseService(TmsDb1Context context, ILogger<CourseService>logger): ICourseService
                               // <summary>
                               //context is the database context used to communicate with the database.

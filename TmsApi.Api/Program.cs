@@ -3,7 +3,6 @@ using System.Threading.RateLimiting;
 using Asp.Versioning;
 
 using FluentValidation;
-using JTmsApi.Infrastructure.Persistence;
 using MediatR;
 
 using Microsoft.AspNetCore.Authentication;
@@ -138,9 +137,22 @@ public partial class Program
             options.InstanceName = "tms:";
         });
 
+         // ---------- OpenAPI ----------
+        builder.Services.AddOpenApi("v1",options =>
+        {
+            options.ShouldInclude =description =>
+                description.GroupName == "v1";
+        });
+
+
+        builder.Services.AddOpenApi("v2",options =>
+        {
+            options.ShouldInclude =description =>
+                description.GroupName == "v2";
+        });
 
         // ---------- API Versioning ----------
-        builder.Services.AddApiVersioning(options =>
+     builder.Services.AddApiVersioning(options =>
         {
             options.DefaultApiVersion = new ApiVersion(1, 0);
 
@@ -150,35 +162,16 @@ public partial class Program
 
 
             options.ApiVersionReader =
-                ApiVersionReader.Combine(
-                    new UrlSegmentApiVersionReader(),
-                    new HeaderApiVersionReader("X-Api-Version"));
+            
+                    new UrlSegmentApiVersionReader();
         })
         .AddApiExplorer(options =>
         {
-            options.GroupNameFormat = "'v'vvv";
+            options.GroupNameFormat = "'v'VVV";
 
             options.SubstituteApiVersionInUrl = true;
         });
 
-
-        // ---------- OpenAPI ----------
-        builder.Services.AddOpenApi("v1",
-        options =>
-        {
-            options.ShouldInclude =
-                description =>
-                description.GroupName == "v1";
-        });
-
-
-        builder.Services.AddOpenApi("v2",
-        options =>
-        {
-            options.ShouldInclude =
-                description =>
-                description.GroupName == "v2";
-        });
 
 
         // ---------- Rate Limiting ----------
@@ -339,9 +332,7 @@ public partial class Program
 
 
 
-        app.MapGet(
-        "/api/enrollments/worker-smoke",
-        (EnrollmentWorker worker) =>
+        app.MapGet("/api/enrollments/worker-smoke",(EnrollmentWorker worker) =>
         {
             worker.ProcessBatch();
 
@@ -350,9 +341,7 @@ public partial class Program
 
 
 
-        app.MapGet(
-        "/api/error",
-        () =>
+        app.MapGet( "/api/error",() =>
         {
             throw new TmsDatabaseException(
                 "Simulated database failure");
@@ -367,13 +356,10 @@ public partial class Program
 
         app.MapScalarApiReference(options =>
         {
-            options
-            .WithTitle("TMS API Reference")
+            options.WithTitle("TMS API Reference")
             .WithTheme(ScalarTheme.DeepSpace)
-            .WithDefaultHttpClient(
-                ScalarTarget.CSharp,
-                ScalarClient.HttpClient)
-            .AddDocument("v1", "API Version 1.0")
+            .WithDefaultHttpClient(ScalarTarget.CSharp,ScalarClient.HttpClient);
+            options.AddDocument("v1", "API Version 1.0")
             .AddDocument("v2", "API Version 2.0");
         });
 
