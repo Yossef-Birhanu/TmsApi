@@ -1,3 +1,4 @@
+using System.Threading.Channels;
 using System.Threading.RateLimiting;
 
 using Asp.Versioning;
@@ -20,11 +21,12 @@ using TmsApi.Api.Worker;
 using TmsApi.Application.Behaviors;
 using TmsApi.Application.Enrollments.Commands;
 using TmsApi.Application.Interfaces;
-
+using TmsApi.Application.Transcripts;
 using TmsApi.Domain.Entities;
 
 using TmsApi.Infrastructure.Persistence;
 using TmsApi.Infrastructure.Services;
+using TmsApi.Infrastructure.Transcripts;
 
 
 public partial class Program
@@ -68,6 +70,15 @@ public partial class Program
         builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
         builder.Services.AddScoped<ICourseService, CourseService>();
         builder.Services.AddScoped<ICachedCourseService, CachedCourseService>();
+        builder.Services.AddSingleton<ITranscriptStatusStore, InMemoryTranscriptStatusStore>();
+        //-------------BOUNDED CHANNEL------------
+        builder.Services.AddSingleton(Channel.CreateBounded<TranscriptRequest>(
+            new BoundedChannelOptions(100)
+        {
+            FullMode = BoundedChannelFullMode.Wait
+        }));
+    
+
 
 
         // ---------- MediatR ----------
