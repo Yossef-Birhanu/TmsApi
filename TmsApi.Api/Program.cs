@@ -14,13 +14,16 @@ using Microsoft.Extensions.Caching.Hybrid;
 using Scalar.AspNetCore;
 
 using TmsApi.Api.ExceptionHandlers;
+using TmsApi.Api.Hubs;
 using TmsApi.Api.Middlewares;
+using TmsApi.Api.Notifications;
 using TmsApi.Api.RateLimiting;
 using TmsApi.Api.Worker;
 
 using TmsApi.Application.Behaviors;
 using TmsApi.Application.Enrollments.Commands;
 using TmsApi.Application.Interfaces;
+using TmsApi.Application.Notifications;
 using TmsApi.Application.Transcripts;
 using TmsApi.Domain.Entities;
 
@@ -71,6 +74,7 @@ public partial class Program
         builder.Services.AddScoped<ICourseService, CourseService>();
         builder.Services.AddScoped<ICachedCourseService, CachedCourseService>();
         builder.Services.AddSingleton<ITranscriptStatusStore, InMemoryTranscriptStatusStore>();
+        builder.Services.AddSingleton<ITranscriptNotificationService, SignalRTranscriptNotificationService>();
         //-------------BOUNDED CHANNEL------------
         builder.Services.AddSingleton(Channel.CreateBounded<TranscriptRequest>(
             new BoundedChannelOptions(100)
@@ -79,7 +83,8 @@ public partial class Program
         }));
     
 
-
+          //----------SignalIR--------------
+          builder.Services.AddSignalR();
 
         // ---------- MediatR ----------
         builder.Services.AddMediatR(cfg =>
@@ -308,6 +313,7 @@ public partial class Program
         app.UseExceptionHandler();
 
         app.UseStatusCodePages();
+        app.MapHub<TmsHub>("/hubs/tms");
 
         app.UseMiddleware<V1DeprecationMiddleware>();
 
