@@ -1,29 +1,65 @@
+import {
+  Component,
+  inject,
+  OnInit
+} from '@angular/core';
 
-import { Component, inject, OnInit } from '@angular/core';
-import { EnrollmentStore } from '../../store/enrollment.store';
-import { AnalyticsChartComponent } from "../../ui/analytics-chart/analytics-chart.component";
+import {
+  EnrollmentStore
+} from '../../store/enrollment.store';
+
+import {
+  AnalyticsChartComponent
+} from '../../ui/analytics-chart/analytics-chart.component';
+
 
 @Component({
   selector: 'tms-instructor-dashboard',
+
   standalone: true,
 
-  // The dashboard template contains the @defer block
-  // that loads the analytics chart when needed.
+  // Dashboard template
   templateUrl: './instructor-dashboard.component.html',
 
-  // External stylesheet for the dashboard.
+  // Dashboard stylesheet
   styleUrl: './instructor-dashboard.component.scss',
-  imports: [AnalyticsChartComponent]
-})
-export class InstructorDashboardComponent implements OnInit {
 
-  // Inject the EnrollmentStore to manage enrollment data.
+  imports: [
+    AnalyticsChartComponent
+  ]
+})
+export class InstructorDashboardComponent
+  implements OnInit {
+
+
+  // ========================================================
+  // ENROLLMENT STORE
+  // ========================================================
+
+  // Inject EnrollmentStore.
   store = inject(EnrollmentStore);
 
-  // Load enrollments when the dashboard is initialized.
-  ngOnInit(): void {
-    this.store.loadEnrollments();
-  }
-}
 
+  // ========================================================
+  // COMPONENT INITIALIZATION
+  // ========================================================
+
+  ngOnInit(): void {
+
+    // Load the existing enrollments from the API.
+    this.store.loadEnrollments();
+
+
+    // Start SignalR live synchronization.
+    //
+    // This listens for:
+    //
+    // ReceiveEnrollmentStatusUpdated
+    //
+    // from the .NET backend.
+    this.store.listenForLiveUpdates();
+
+  }
+
+}
 

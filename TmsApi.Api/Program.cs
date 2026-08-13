@@ -30,6 +30,7 @@ using TmsApi.Domain.Entities;
 using TmsApi.Infrastructure.Persistence;
 using TmsApi.Infrastructure.Services;
 using TmsApi.Infrastructure.Transcripts;
+using TmsApi.Infrastructure.Workers;
 
 
 public partial class Program
@@ -109,7 +110,7 @@ public partial class Program
 
         // ---------- Controllers ----------
         builder.Services.AddControllers();
-
+        builder.Services.AddHostedService<TranscriptWorker>();
 
         // ---------- Exception Handling ----------
         builder.Services.AddExceptionHandler<GlobalExceptionHandler>();

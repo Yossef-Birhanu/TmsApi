@@ -138,4 +138,5 @@ public interface IEnrollmentService
     Task<IEnumerable<Enrollment>> GetByStudentIdAsync(
         int studentId,
         CancellationToken ct);
+    Task<bool> ApproveAsync(int id, CancellationToken ct);
 }

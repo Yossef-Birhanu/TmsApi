@@ -17,6 +17,7 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+
       "architect": {
         "build": {
           "builder": "@angular/build:application",
@@ -34,6 +35,7 @@
               "src/styles.scss"
             ]
           },
+
           "configurations": {
             "production": {
               "budgets": [
@@ -50,26 +52,37 @@
               ],
               "outputHashing": "all"
             },
+
             "development": {
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
             }
           },
+
           "defaultConfiguration": "production"
         },
+
         "serve": {
           "builder": "@angular/build:dev-server",
+
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
+
           "configurations": {
             "production": {
               "buildTarget": "tms-client:build:production"
             },
+
             "development": {
               "buildTarget": "tms-client:build:development"
             }
           },
+
           "defaultConfiguration": "development"
         },
+
         "test": {
           "builder": "@angular/build:unit-test"
         }

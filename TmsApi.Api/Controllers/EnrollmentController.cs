@@ -1,10 +1,12 @@
 using Asp.Versioning;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.SignalR;
+using TmsApi.Api.Hubs;
 using TmsApi.Application.DTOs;
 using TmsApi.Application.Enrollments.Commands;
 using TmsApi.Application.Enrollments.Queries;
+using TmsApi.Application.Hubs;
 using TmsApi.Application.Interfaces;
 
 namespace TmsApi.Api.Controllers;
@@ -32,7 +34,7 @@ namespace TmsApi.Api.Controllers;
 [ApiVersion("2.0")]
 public class EnrollmentsController(
     IMediator mediator,
-    IEnrollmentService enrollmentService) : ControllerBase
+    IEnrollmentService enrollmentService,IHubContext<TmsHub, ITmsHubClient> hubContext) : ControllerBase
 {
     // ========================================================
     // GET: /api/v2/enrollments
@@ -93,7 +95,7 @@ public class EnrollmentsController(
                         studentId = created.StudentId
                     },
                     created),
-
+   
             // ------------------------------------------------
             // Enrollment failed.
             // ------------------------------------------------
@@ -126,8 +128,52 @@ public class EnrollmentsController(
                     type: $"https://tms.local/errors/{error.Code}");
             });
     }
+ // ========================================================
+// POST: /api/v2/enrollments/{id}/approve
+// ========================================================
+//
+// Approves an enrollment and notifies all connected
+// Angular clients through SignalR.
+//
+// ========================================================
 
+[HttpPost("{id:int}/approve")]
+public async Task<IActionResult> Approve(
+    int id,
+    CancellationToken ct)
+{
+    // ----------------------------------------------------
+    // Step 1: Approve the enrollment in the database.
+    // ----------------------------------------------------
 
+    var approved = await enrollmentService.ApproveAsync(id, ct);
+
+    // ----------------------------------------------------
+    // Step 2: If the enrollment was not found, return 404.
+    // ----------------------------------------------------
+
+    if (!approved)
+    {
+        return NotFound();
+    }
+
+    // ----------------------------------------------------
+    // Step 3: Database approval succeeded.
+    //
+    // Notify ALL connected Angular clients.
+    // ----------------------------------------------------
+
+    await hubContext.Clients.All.ReceiveEnrollmentStatusUpdate(
+        id.ToString(),
+        "Approved");
+
+    // ----------------------------------------------------
+    // Step 4: Return HTTP 204 No Content.
+    // ----------------------------------------------------
+
+    return NoContent();
+}
+    
     // ========================================================
     // GET:
     // /api/v2/enrollments/{studentId}/schedule
@@ -340,7 +386,7 @@ public class EnrollmentController(
                 Status = StatusCodes.Status409Conflict
             });
         }
-
+         
 
         // ----------------------------------------------------
         // Step 3: Check whether the student is already

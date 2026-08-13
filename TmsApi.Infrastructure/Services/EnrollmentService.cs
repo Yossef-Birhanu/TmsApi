@@ -411,4 +411,22 @@ public class EnrollmentService(
             .Where(e => e.StudentId == studentId)
             .ToListAsync(ct);
     }
+    public async Task<bool> ApproveAsync(
+    int id,
+    CancellationToken ct)
+{
+    var enrollment = await context.Enrollments
+        .FirstOrDefaultAsync(e => e.Id == id, ct);
+
+    if (enrollment is null)
+    {
+        return false;
+    }
+
+    enrollment.Status = EnrollmentStatus.Approved;
+
+    await context.SaveChangesAsync(ct);
+
+    return true;
+}
 }
