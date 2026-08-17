@@ -1,0 +1,13 @@
+@Josi_TmsApi_HostAddress = http://localhost:5094
+
+GET {{Josi_TmsApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+GET {{{{Josi_TmsApi_HostAddress}}}/api/courses/1
+Accept: application/json
+
+
+###
+GET http://localhost:5094/api/v1/courses
+Accept: application/json

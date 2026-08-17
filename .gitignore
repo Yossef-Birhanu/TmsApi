@@ -1,0 +1,35 @@
+# Build output
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# Environment files
+.env
+
+# ASP.NET configuration secrets
+appsettings.Development.json
+
+# User secrets
+secrets.json
+
+# NuGet packages (if packages folder exists)
+packages/
+
+# Publish output
+publish/
+
+# Test results
+TestResults/

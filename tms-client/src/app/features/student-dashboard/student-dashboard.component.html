@@ -1,0 +1,62 @@
+
+<h2>Student Dashboard</h2>
+
+<div class="student-info">
+  <h3>Student Information</h3>
+
+  <p>
+    <strong>Name:</strong>
+    {{ studentName() }}
+  </p>
+
+  <p>
+    <strong>Earned Credits:</strong>
+    {{ earnedCredits() }}
+  </p>
+
+  <p>
+    <strong>Graduation Status:</strong>
+    {{ graduationStatus() }}
+  </p>
+
+  <button (click)="registerForClass()">
+    Register for Class (+3 Credits)
+  </button>
+</div>
+
+ 
+
+<h2>Course Catalog</h2>
+
+@if (coursesResource.isLoading()) {
+
+  <div class="spinner">
+    Fetching courses from the server...
+  </div>
+
+} @else if (coursesResource.error()) {
+
+  <div class="error">
+    Could not load courses. Make sure your .NET API is running.
+  </div>
+
+} @else {
+
+  <div class="grid">
+
+    @for (course of coursesResource.value()!; track course.id) {
+
+      <tms-course-card
+        [course]="course"
+        (enrollClick)="handleEnroll($event)"
+      />
+
+    } @empty {
+
+      <p>No courses are available this term.</p>
+
+    }
+
+  </div>
+
+}
