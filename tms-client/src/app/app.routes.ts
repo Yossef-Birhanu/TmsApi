@@ -1,5 +1,6 @@
-import { Routes } from "@angular/router";
-
+import { Routes } from '@angular/router';
+import { roleGuard } from './guards/role.guard';
+import { AdminCourseListComponent } from './features/admin/admin-course-list/admin-course-list.component';
 export const routes: Routes = [
   {
     // ==========================================================
@@ -73,6 +74,12 @@ export const routes: Routes = [
     .then(m=>m.GradeSubmissionComponent)
 
   },
+
+  {
+  path: 'admin/courses',
+  component: AdminCourseListComponent,
+  canActivate: [roleGuard('Admin')]
+},
  
   {
     // ==========================================================

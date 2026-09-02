@@ -291,27 +291,27 @@ public async Task<IEnumerable<Course>> GetAllAsync(
     // The exact properties depend on your UpdateCourseCommand.
     // ============================================================
 
-    public async Task<bool> UpdateAsync(
-        UpdateCourseCommand command,
-        CancellationToken ct)
+   public async Task<bool> UpdateAsync(
+    int id,
+    UpdateCourseRequest request,
+    CancellationToken ct)
+{
+    var course = await context.Courses
+        .FirstOrDefaultAsync(
+            c => c.Id == id,
+            ct);
+
+    if (course is null)
     {
-        var course = await context.Courses
-            .FirstOrDefaultAsync(
-                c => c.Id == command.Id,
-                ct);
-
-        if (course is null)
-        {
-            return false;
-        }
-
-        // Update the course properties.
-        course.Code = command.Code;
-        course.Title = command.Title;
-        course.MaxCapacity = command.MaxCapacity;
-
-        await context.SaveChangesAsync(ct);
-
-        return true;
+        return false;
     }
+
+    course.Code = request.Code;
+    course.Title = request.Title;
+    course.MaxCapacity = request.MaxCapacity;
+
+    await context.SaveChangesAsync(ct);
+
+    return true;
+}
 }

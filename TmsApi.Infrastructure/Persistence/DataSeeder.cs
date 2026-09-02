@@ -56,4 +56,46 @@ public static class DataSeeder{
 }
 
 
+// public static async Task SeedAsync(
+//     TmsDb1Context context,
+//     CancellationToken ct = default)
+// {
+//     Console.WriteLine("=================================");
+//     Console.WriteLine("DATA SEEDER STARTED");
+//     Console.WriteLine("=================================");
+
+//     await context.Database.MigrateAsync(ct);
+
+//     Console.WriteLine("Database migration completed.");
+
+//     foreach (var (code, title, maxCapacity) in Courses)
+//     {
+//         var exists = await context.Courses
+//             .AnyAsync(c => c.Code == code, ct);
+
+//         if (exists)
+//         {
+//             Console.WriteLine($"Already exists: {code}");
+//             continue;
+//         }
+
+//         context.Courses.Add(new Course
+//         {
+//             Code = code,
+//             Title = title,
+//             MaxCapacity = maxCapacity
+//         });
+
+//         Console.WriteLine($"Adding: {code} - {title}");
+//     }
+
+//     await context.SaveChangesAsync(ct);
+
+//     var totalCourses = await context.Courses.CountAsync(ct);
+
+//     Console.WriteLine("=================================");
+//     Console.WriteLine($"TOTAL COURSES: {totalCourses}");
+//     Console.WriteLine("=================================");
+// }
+
 }

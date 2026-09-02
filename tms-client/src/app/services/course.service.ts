@@ -11,24 +11,35 @@ export class CourseService {
   private http = inject(HttpClient);
 
   // Your .NET TMS API uses port 5094 and API version 2.
-  private baseUrl = "http://localhost:5094/api/Courses";
+  private baseUrl = "http://localhost:5094/api/v1/Courses";
 
   // Gets all courses from the API.
-  getAll(page = 1, pageSize = 50) {
+  // getAll(page = 1, pageSize = 50) {
+  //   return this.http
+  //     .get<PagedResponse<Course>>(this.baseUrl, {
+  //       params: {
+  //         page: page.toString(),
+  //         pageSize: pageSize.toString()
+  //       }
+  //     })
+  //     .pipe(
+  //       map((p) => p.items)
+  //     );
+  // }
+  getAll(){
     return this.http
-      .get<PagedResponse<Course>>(this.baseUrl, {
-        params: {
-          page: page.toString(),
-          pageSize: pageSize.toString()
-        }
-      })
-      .pipe(
-        map((p) => p.items)
-      );
+    .get<PagedResponse<Course>>(this.baseUrl,{
+      params:{page: '1',pageSize: '50'}
+
+    })
+    .pipe(map(response=>response.items));
   }
 
   // Gets one course by its ID.
   getById(id: string) {
     return this.http.get<CourseDetail>(`${this.baseUrl}/${id}`);
   }
+  delete(id: number) {
+  return this.http.delete<void>(`${this.baseUrl}/${id}`);
+}
 }
