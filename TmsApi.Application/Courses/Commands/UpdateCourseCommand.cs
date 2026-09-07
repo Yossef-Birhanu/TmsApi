@@ -4,7 +4,7 @@ namespace TmsApi.Application.Courses.Commands;
 
 public record UpdateCourseCommand(
     int Id,
-    string Title,
     string Code,
-    int MaxCapacity
+    string Title,
+    string Description
 ) : IRequest<bool>;

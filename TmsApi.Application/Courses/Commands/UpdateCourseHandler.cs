@@ -1,4 +1,5 @@
 using MediatR;
+using TmsApi.Application.DTOs;
 using TmsApi.Application.Interfaces;
 
 namespace TmsApi.Application.Courses.Commands;
@@ -12,7 +13,17 @@ public class UpdateCourseHandler(
         UpdateCourseCommand command,
         CancellationToken ct)
     {
-        var updated = await service.UpdateAsync(command, ct);
+        var request = new UpdateCourseRequest
+        {
+            Code = command.Code,
+            Title = command.Title,
+            Description = command.Description
+        };
+
+        var updated = await service.UpdateAsync(
+            command.Id,
+            request,
+            ct);
 
         if (!updated)
             return false;

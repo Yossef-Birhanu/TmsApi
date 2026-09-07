@@ -1,0 +1,177 @@
+<div class="login-container">
+
+  <!-- Login Header -->
+  <div class="login-header">
+
+    <h1>Login</h1>
+
+    <p class="login-subtitle">
+      Welcome back! Please sign in to continue.
+    </p>
+
+  </div>
+
+
+  <!-- Login Form -->
+  <form
+    [formGroup]="loginForm"
+    (ngSubmit)="login()">
+
+    <!-- ================= EMAIL ================= -->
+    <div class="form-group">
+
+      <label for="email">
+        Email
+      </label>
+
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        placeholder="Enter your email"
+        autocomplete="email"
+      />
+
+      @if (
+        loginForm.controls.email.touched &&
+        loginForm.controls.email.invalid
+      ) {
+
+        <small class="error-message">
+          Please enter a valid email address.
+        </small>
+
+      }
+
+    </div>
+
+
+    <!-- ================= PASSWORD ================= -->
+    <div class="form-group">
+
+      <div class="password-label-row">
+
+        <label for="password">
+          Password
+        </label>
+
+       
+
+      </div>
+
+
+      <!-- Password Input -->
+      <div class="password-wrapper">
+
+        <input
+          id="password"
+          [type]="showPassword ? 'text' : 'password'"
+          formControlName="password"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+        />
+
+
+        <!-- SHOW PASSWORD BUTTON -->
+        <button
+          type="button"
+          class="show-password-btn"
+          (click)="togglePassword()"
+          [attr.aria-label]="
+            showPassword
+              ? 'Hide password'
+              : 'Show password'
+          ">
+
+          @if (showPassword) {
+            👁️
+          } @else {
+            👁️‍🗨️
+          }
+
+        </button>
+
+      </div>
+
+
+      @if (
+        loginForm.controls.password.touched &&
+        loginForm.controls.password.invalid
+      ) {
+
+        <small class="error-message">
+          Password is required.
+        </small>
+
+      }
+
+    </div>
+
+
+    <!-- ================= API ERROR ================= -->
+    @if (errorMessage) {
+
+      <div class="api-error">
+
+        <span class="error-icon">
+          ⚠️
+        </span>
+
+        <span>
+          {{ errorMessage }}
+        </span>
+
+      </div>
+
+    }
+
+
+    <!-- ================= LOGIN BUTTON ================= -->
+    <button
+      type="submit"
+      class="login-button"
+      [disabled]="loginForm.invalid">
+
+    Login
+
+    </button> 
+
+
+     <!-- RESET PASSWORD -->
+      <div class="form-group">
+        <a
+          routerLink="/reset-password"
+          class="forgot-password">
+
+          Forgot Password?
+
+        </a>
+        </div>
+
+
+    <!-- ================= CREATE ACCOUNT ================= -->
+    <div class="create-account">
+
+      <span>
+        Don't have an account?
+      </span>
+
+      <a routerLink="/signup">
+        Create Account
+      </a>
+
+    </div>
+
+  </form>
+
+
+  <!-- ================= BACK TO HOME ================= -->
+  <div class="back-home">
+
+    <a routerLink="/home">
+      ← Back to Home
+    </a>
+
+  </div>
+
+</div>

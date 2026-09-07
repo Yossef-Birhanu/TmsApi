@@ -1,3 +1,4 @@
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AnalyticsChartComponent } from './analytics-chart.component';
@@ -12,7 +13,12 @@ describe('AnalyticsChartComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(AnalyticsChartComponent);
+
+    // AnalyticsChartComponent requires a "data" input.
+    fixture.componentRef.setInput('data', []);
+
     component = fixture.componentInstance;
+
     await fixture.whenStable();
   });
 
@@ -20,3 +26,4 @@ describe('AnalyticsChartComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

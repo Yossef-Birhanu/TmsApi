@@ -1,22 +1,21 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { EnrollmentStore } from './enrollment.store';
 
 describe('EnrollmentStore', () => {
-  let component: EnrollmentStore;
-  let fixture: ComponentFixture<EnrollmentStore>;
+  let store: any;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [EnrollmentStore],
-    }).compileComponents();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        EnrollmentStore
+      ],
+    });
 
-    fixture = TestBed.createComponent(EnrollmentStore);
-    component = fixture.componentInstance;
-    await fixture.whenStable();
+    store = TestBed.inject(EnrollmentStore);
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(store).toBeTruthy();
   });
 });

@@ -1,0 +1,432 @@
+/* ============================================================
+   REGISTRATION CONTAINER
+============================================================ */
+
+.registration-container {
+
+  min-height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 40px 20px;
+
+  background: #f5f7fb;
+
+}
+
+
+/* ============================================================
+   REGISTRATION CARD
+============================================================ */
+
+.registration-card {
+
+  width: 100%;
+
+  max-width: 650px;
+
+  background: white;
+
+  border-radius: 12px;
+
+  padding: 35px;
+
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+
+}
+
+
+/* ============================================================
+   FORM HEADER
+============================================================ */
+
+.form-header {
+
+  margin-bottom: 20px;
+
+  text-align: center;
+
+}
+
+
+.form-header h1 {
+
+  margin: 0 0 10px;
+
+  font-size: 30px;
+
+  font-weight: 700;
+
+}
+
+
+.form-header p {
+
+  margin: 0;
+
+  color: #6b7280;
+
+}
+
+
+/* ============================================================
+   LOGIN SECTION
+============================================================ */
+
+.login-link {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 25px;
+
+  font-size: 14px;
+
+  color: #6b7280;
+
+}
+
+
+.btn-login {
+
+  border: none;
+
+  background: transparent;
+
+  color: #2563eb;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  padding: 4px 8px;
+
+}
+
+
+.btn-login:hover {
+
+  color: #1d4ed8;
+
+  text-decoration: underline;
+
+}
+
+
+/* ============================================================
+   FORM GROUP
+============================================================ */
+
+.form-group {
+
+  margin-bottom: 22px;
+
+}
+
+
+.form-group label {
+
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-weight: 600;
+
+}
+
+
+.required {
+
+  color: #dc2626;
+
+}
+
+
+/* ============================================================
+   INPUTS
+============================================================ */
+
+.form-group input[type="text"],
+.form-group input[type="number"] {
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 12px 14px;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 7px;
+
+  font-size: 15px;
+
+  outline: none;
+
+  transition: border-color 0.2s;
+
+}
+
+
+.form-group input:focus {
+
+  border-color: #2563eb;
+
+}
+
+
+.form-group input.ng-invalid.ng-touched {
+
+  border-color: #dc2626;
+
+}
+
+
+/* ============================================================
+   HELP TEXT
+============================================================ */
+
+.form-group small {
+
+  display: block;
+
+  margin-top: 6px;
+
+  color: #6b7280;
+
+}
+
+
+/* ============================================================
+   VALIDATION ERROR
+============================================================ */
+
+.validation-error {
+
+  margin-top: 6px;
+
+  color: #dc2626;
+
+  font-size: 13px;
+
+}
+
+
+.validation-error span {
+
+  display: block;
+
+}
+
+
+/* ============================================================
+   CHECKBOX
+============================================================ */
+
+.checkbox-group {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin: 25px 0;
+
+}
+
+
+.checkbox-group input {
+
+  width: 18px;
+
+  height: 18px;
+
+}
+
+
+.checkbox-group label {
+
+  font-weight: 500;
+
+}
+
+
+/* ============================================================
+   FORM ACTIONS
+============================================================ */
+
+.form-actions {
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 12px;
+
+  margin-top: 30px;
+
+}
+
+
+.form-actions button {
+
+  padding: 12px 22px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+}
+
+
+/* ============================================================
+   CANCEL BUTTON
+============================================================ */
+
+.btn-cancel {
+
+  background: #e5e7eb;
+
+  color: #374151;
+
+}
+
+
+.btn-cancel:hover {
+
+  background: #d1d5db;
+
+}
+
+
+/* ============================================================
+   SUBMIT BUTTON
+============================================================ */
+
+.btn-submit {
+
+  background: #2563eb;
+
+  color: white;
+
+}
+
+
+.btn-submit:hover {
+
+  background: #1d4ed8;
+
+}
+
+
+/* ============================================================
+   DISABLED BUTTONS
+============================================================ */
+
+.btn-submit:disabled,
+.btn-cancel:disabled {
+
+  opacity: 0.6;
+
+  cursor: not-allowed;
+
+}
+
+
+/* ============================================================
+   SUCCESS MESSAGE
+============================================================ */
+
+.success-message {
+
+  padding: 12px 15px;
+
+  margin-bottom: 20px;
+
+  border-radius: 7px;
+
+  background: #dcfce7;
+
+  color: #166534;
+
+}
+
+
+/* ============================================================
+   ERROR MESSAGE
+============================================================ */
+
+.error-message {
+
+  padding: 12px 15px;
+
+  margin-bottom: 20px;
+
+  border-radius: 7px;
+
+  background: #fee2e2;
+
+  color: #991b1b;
+
+}
+
+
+/* ============================================================
+   RESPONSIVE DESIGN
+============================================================ */
+
+@media (max-width: 600px) {
+
+  .registration-container {
+
+    padding: 20px 10px;
+
+  }
+
+
+  .registration-card {
+
+    padding: 25px 20px;
+
+  }
+
+
+  .form-header h1 {
+
+    font-size: 25px;
+
+  }
+
+
+  .form-actions {
+
+    flex-direction: column;
+
+  }
+
+
+  .form-actions button {
+
+    width: 100%;
+
+  }
+
+}

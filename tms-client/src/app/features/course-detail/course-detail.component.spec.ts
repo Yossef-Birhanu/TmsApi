@@ -1,3 +1,5 @@
+
+import { provideRouter } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseDetailComponent } from './course-detail.component';
@@ -9,10 +11,16 @@ describe('CourseDetailComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CourseDetailComponent],
+      providers: [provideRouter([])]
     }).compileComponents();
 
     fixture = TestBed.createComponent(CourseDetailComponent);
+
+    // CourseDetailComponent requires an "id" input.
+    fixture.componentRef.setInput('id', 1);
+
     component = fixture.componentInstance;
+
     await fixture.whenStable();
   });
 
@@ -20,3 +28,4 @@ describe('CourseDetailComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

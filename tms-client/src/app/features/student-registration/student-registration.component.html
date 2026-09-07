@@ -1,0 +1,353 @@
+
+<div class="registration-container">
+
+  <div class="registration-card">
+
+    <!-- ======================================================
+         HEADER
+    ======================================================= -->
+
+    <div class="form-header">
+
+      <h1>
+        Student Registration
+      </h1>
+
+      <p>
+        Register a new student in the Training Management System
+      </p>
+
+    </div>
+
+
+    <!-- ======================================================
+         SUCCESS MESSAGE
+    ======================================================= -->
+
+    @if (successMessage) {
+
+      <div class="success-message">
+
+        {{ successMessage }}
+
+      </div>
+
+    }
+
+
+    <!-- ======================================================
+         ERROR MESSAGE
+    ======================================================= -->
+
+    @if (errorMessage) {
+
+      <div class="error-message">
+
+        {{ errorMessage }}
+
+      </div>
+
+    }
+
+
+    <!-- ======================================================
+         REGISTRATION FORM
+    ======================================================= -->
+
+    <form
+      [formGroup]="studentForm"
+      (ngSubmit)="submit()"
+      novalidate
+    >
+
+
+      <!-- ====================================================
+           REGISTRATION NUMBER
+      ===================================================== -->
+
+      <div class="form-group">
+
+        <label for="registrationNumber">
+
+          Registration Number
+
+          <span class="required">
+            *
+          </span>
+
+        </label>
+
+
+        <input
+          id="registrationNumber"
+          type="text"
+          formControlName="registrationNumber"
+          placeholder="e.g. STU-2026-001"
+        />
+
+
+        @if (
+          registrationNumber.invalid &&
+          registrationNumber.touched
+        ) {
+
+          <div class="validation-error">
+
+            @if (registrationNumber.errors?.['required']) {
+
+              <span>
+                Registration number is required.
+              </span>
+
+            }
+
+            @if (registrationNumber.errors?.['minlength']) {
+
+              <span>
+                Registration number must be at least 3 characters.
+              </span>
+
+            }
+
+            @if (registrationNumber.errors?.['maxlength']) {
+
+              <span>
+                Registration number cannot exceed 50 characters.
+              </span>
+
+            }
+
+          </div>
+
+        }
+
+      </div>
+
+
+      <!-- ====================================================
+           STUDENT NAME
+      ===================================================== -->
+
+      <div class="form-group">
+
+        <label for="name">
+
+          Student Name
+
+          <span class="required">
+            *
+          </span>
+
+        </label>
+
+
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Enter student's full name"
+        />
+
+
+        @if (
+          name.invalid &&
+          name.touched
+        ) {
+
+          <div class="validation-error">
+
+            @if (name.errors?.['required']) {
+
+              <span>
+                Student name is required.
+              </span>
+
+            }
+
+            @if (name.errors?.['minlength']) {
+
+              <span>
+                Name must be at least 2 characters.
+              </span>
+
+            }
+
+            @if (name.errors?.['maxlength']) {
+
+              <span>
+                Name cannot exceed 100 characters.
+              </span>
+
+            }
+
+          </div>
+
+        }
+
+      </div>
+
+
+      <!-- ====================================================
+           GPA
+      ===================================================== -->
+
+      <div class="form-group">
+
+        <label for="gpa">
+
+          GPA
+
+          <span class="required">
+            *
+          </span>
+
+        </label>
+
+
+        <input
+          id="gpa"
+          type="number"
+          formControlName="gpa"
+          min="0"
+          max="4"
+          step="0.01"
+          placeholder="0.00"
+        />
+
+
+        <small>
+          Enter GPA between 0.00 and 4.00
+        </small>
+
+
+        @if (
+          gpa.invalid &&
+          gpa.touched
+        ) {
+
+          <div class="validation-error">
+
+            @if (gpa.errors?.['required']) {
+
+              <span>
+                GPA is required.
+              </span>
+
+            }
+
+            @if (gpa.errors?.['min']) {
+
+              <span>
+                GPA cannot be less than 0.
+              </span>
+
+            }
+
+            @if (gpa.errors?.['max']) {
+
+              <span>
+                GPA cannot be greater than 4.
+              </span>
+
+            }
+
+          </div>
+
+        }
+
+      </div>
+
+
+      <!-- ====================================================
+           ACTIVE STATUS
+      ===================================================== -->
+
+      <div class="checkbox-group">
+
+        <input
+          id="isActive"
+          type="checkbox"
+          formControlName="isActive"
+        />
+
+
+        <label for="isActive">
+
+          Student is active
+
+        </label>
+
+      </div>
+
+
+      <!-- ====================================================
+           FORM ACTIONS
+      ===================================================== -->
+
+      <div class="form-actions">
+
+
+        <!-- CANCEL -->
+
+        <button
+          type="button"
+          class="btn-cancel"
+          (click)="cancel()"
+          [disabled]="isSubmitting"
+        >
+
+          Cancel
+
+        </button>
+
+
+        <!-- REGISTER -->
+
+        <button
+          type="submit"
+          class="btn-submit"
+          [disabled]="isSubmitting"
+        >
+
+          @if (isSubmitting) {
+
+            Registering...
+
+          }
+
+          @else {
+
+            Register Student
+
+          }
+
+        </button>
+
+      </div>
+
+      <!-- ======================================================
+         LOGIN LINK
+    ======================================================= -->
+
+    <div class="login-link">
+
+      <span>
+        Already have an account?
+      </span>
+
+      <button
+        type="button"
+        class="btn-login"
+        (click)="goToLogin()"
+      >
+        Login
+      </button>
+
+    </div>
+
+
+    </form>
+
+  </div>
+
+</div>

@@ -12,31 +12,24 @@ import {
   AnalyticsChartComponent
 } from '../../ui/analytics-chart/analytics-chart.component';
 
-
 @Component({
   selector: 'tms-instructor-dashboard',
-
   standalone: true,
 
-  // Dashboard template
   templateUrl: './instructor-dashboard.component.html',
 
-  // Dashboard stylesheet
   styleUrl: './instructor-dashboard.component.scss',
 
   imports: [
     AnalyticsChartComponent
   ]
 })
-export class InstructorDashboardComponent
-  implements OnInit {
-
+export class InstructorDashboardComponent implements OnInit {
 
   // ========================================================
   // ENROLLMENT STORE
   // ========================================================
 
-  // Inject EnrollmentStore.
   store = inject(EnrollmentStore);
 
 
@@ -46,20 +39,10 @@ export class InstructorDashboardComponent
 
   ngOnInit(): void {
 
-    // Load the existing enrollments from the API.
+    // Load existing enrollments from API
     this.store.loadEnrollments();
 
-
-    // Start SignalR live synchronization.
-    //
-    // This listens for:
-    //
-    // ReceiveEnrollmentStatusUpdated
-    //
-    // from the .NET backend.
+    // Start SignalR live synchronization
     this.store.listenForLiveUpdates();
-
   }
-
 }
-

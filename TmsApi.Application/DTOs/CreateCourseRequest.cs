@@ -9,4 +9,5 @@ public required string Code { get; init; }
 public required string Title { get; init; }
 [Range(1, 200)]
 public int MaxCapacity { get; init; }
+ public string Description { get; set; } = string.Empty;
 }

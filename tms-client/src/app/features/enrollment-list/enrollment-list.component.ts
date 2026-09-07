@@ -59,6 +59,13 @@ import { Enrollment } from "../../models/enrollment.model";
   styleUrl: "./enrollment-list.component.scss",
 })
 export class EnrollmentListComponent {
+auth: any;
+deleteCourse(arg0: any) {
+throw new Error('Method not implemented.');
+}
+courses() {
+throw new Error('Method not implemented.');
+}
 
   // ============================================================
   // ENROLLMENT STORE

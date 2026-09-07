@@ -1,0 +1,968 @@
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<header class="navbar">
+
+  <!-- LOGO -->
+  <div class="logo">
+    <span class="logo-icon">T</span>
+    <span class="logo-text">TMS</span>
+  </div>
+
+
+  <!-- NAVIGATION LINKS -->
+  <nav class="nav-links">
+
+    <!-- HOME -->
+    <a
+  routerLink="/home"
+  routerLinkActive="active">
+  Home
+</a>
+
+
+    <!-- ABOUT US DROPDOWN -->
+    <div class="dropdown">
+
+      <button
+        type="button"
+        class="dropdown-btn"
+        (click)="toggleAboutMenu()">
+
+        About Us
+
+        <span
+          class="arrow"
+          [class.rotate]="aboutMenuOpen">
+          ▾
+        </span>
+
+      </button>
+
+
+      <!-- DROPDOWN MENU -->
+      @if (aboutMenuOpen) {
+
+        <div class="dropdown-menu">
+
+          <!-- ABOUT -->
+          <a
+            routerLink="/about"
+            (click)="closeAboutMenu()">
+
+            <span class="menu-icon">ℹ️</span>
+
+            <span>
+              <strong>About Us</strong>
+              <small>Learn about TMS</small>
+            </span>
+
+          </a>
+
+
+          <!-- MISSION -->
+          <a
+            routerLink="/mission"
+            (click)="closeAboutMenu()">
+
+            <span class="menu-icon">🎯</span>
+
+            <span>
+              <strong>Mission</strong>
+              <small>Our mission</small>
+            </span>
+
+          </a>
+
+
+          <!-- VISION -->
+          <a
+            routerLink="/vision"
+            (click)="closeAboutMenu()">
+
+            <span class="menu-icon">🌍</span>
+
+            <span>
+              <strong>Vision</strong>
+              <small>Our vision</small>
+            </span>
+
+          </a>
+
+
+          <!-- VALUES -->
+          <a
+            routerLink="/values"
+            (click)="closeAboutMenu()">
+
+            <span class="menu-icon">⭐</span>
+
+            <span>
+              <strong>Values</strong>
+              <small>What we believe</small>
+            </span>
+
+          </a>
+
+        </div>
+
+      }
+
+    </div>
+
+
+    <!-- CONTACT -->
+    <a href="#contact">
+      Contact Us
+    </a>
+
+  </nav>
+
+
+  <!-- RIGHT SIDE BUTTONS -->
+  <div class="nav-buttons">
+
+    <a
+      routerLink="/signup"
+      class="signup-btn">
+
+      Sign Up
+
+    </a>
+
+  </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     HERO SECTION
+========================================================= -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <span class="hero-badge">
+      Training Management System
+    </span>
+
+
+    <h1>
+
+      Manage Your Training
+
+      <span>
+        Smarter & Better
+      </span>
+
+    </h1>
+
+
+    <p>
+
+      A modern Training Management System designed to help
+      administrators, instructors, and students manage courses,
+      enrollments, assessments, and certificates efficiently.
+
+    </p>
+
+
+    <!-- HERO BUTTONS -->
+    <div class="hero-buttons">
+
+      <a
+        routerLink="/signup"
+        class="primary-btn">
+
+        Get Started
+
+      </a>
+
+
+      <a
+        routerLink="/about"
+        class="secondary-btn">
+
+        Learn More
+
+      </a>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- HERO VISUAL -->
+  <div class="hero-visual">
+
+    <div class="dashboard-card">
+
+      <div class="dashboard-header">
+
+        <div>
+          <span class="dashboard-label">
+            TMS Dashboard
+          </span>
+
+          <h3>
+            Training Overview
+          </h3>
+        </div>
+
+        <span class="dashboard-icon">
+          📊
+        </span>
+
+      </div>
+
+
+      <div class="dashboard-stats">
+
+        <div class="stat-card">
+          <span class="stat-icon">🎓</span>
+
+          <div>
+            <strong>250+</strong>
+            <small>Students</small>
+          </div>
+        </div>
+
+
+        <div class="stat-card">
+          <span class="stat-icon">📚</span>
+
+          <div>
+            <strong>50+</strong>
+            <small>Courses</small>
+          </div>
+        </div>
+
+
+        <div class="stat-card">
+          <span class="stat-icon">👨‍🏫</span>
+
+          <div>
+            <strong>30+</strong>
+            <small>Instructors</small>
+          </div>
+        </div>
+
+
+        <div class="stat-card">
+          <span class="stat-icon">🏆</span>
+
+          <div>
+            <strong>500+</strong>
+            <small>Certificates</small>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="progress-section">
+
+        <div class="progress-title">
+
+          <span>
+            Training Progress
+          </span>
+
+          <strong>
+            78%
+          </strong>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+          <div class="progress-fill"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     ABOUT SECTION
+========================================================= -->
+
+<section
+  id="about"
+  class="section about-section">
+
+  <div class="section-heading">
+
+    <span>
+      ABOUT US
+    </span>
+
+    <h2>
+      Training Management Made Simple
+    </h2>
+
+    <p>
+      Our Training Management System provides a centralized
+      platform for managing the complete training lifecycle.
+    </p>
+
+  </div>
+
+
+  <div class="about-grid">
+
+    <!-- STUDENT -->
+    <div class="about-card">
+
+      <div class="card-icon">
+        🎓
+      </div>
+
+      <h3>
+        Student Management
+      </h3>
+
+      <p>
+        Manage student profiles, course enrollment,
+        assessments, grades, tutorials, and certificates
+        from one platform.
+      </p>
+
+      <a
+        routerLink="/signup"
+        class="card-link">
+
+        Get Started →
+
+      </a>
+
+    </div>
+
+
+    <!-- INSTRUCTOR -->
+    <div class="about-card">
+
+      <div class="card-icon">
+        👨‍🏫
+      </div>
+
+      <h3>
+        Instructor Management
+      </h3>
+
+      <p>
+        Instructors can create tutorials, manage courses,
+        create assessments, submit grades, and monitor
+        student progress.
+      </p>
+
+      <a
+        routerLink="/login"
+        class="card-link">
+
+        Instructor Login →
+
+      </a>
+
+    </div>
+
+
+    <!-- ADMIN -->
+    <div class="about-card">
+
+      <div class="card-icon">
+        ⚙️
+      </div>
+
+      <h3>
+        Administration
+      </h3>
+
+      <p>
+        Administrators can register instructors, assign
+        courses, manage users, and control all training
+        activities.
+      </p>
+
+      <a
+        routerLink="/login"
+        class="card-link">
+
+        Admin Login →
+
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- VIEW ABOUT PAGE -->
+  <div class="section-action">
+
+    <a
+      routerLink="/about"
+      class="outline-btn">
+
+      Learn More About Us →
+
+    </a>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FEATURES SECTION
+========================================================= -->
+
+<section class="section features-section">
+
+  <div class="section-heading">
+
+    <span>
+      TMS FEATURES
+    </span>
+
+    <h2>
+      Everything You Need in One Platform
+    </h2>
+
+    <p>
+      TMS connects students, instructors, and administrators
+      through a single powerful training platform.
+    </p>
+
+  </div>
+
+
+  <div class="features-grid">
+
+    <!-- COURSE -->
+    <div class="feature-card">
+
+      <div class="feature-icon">
+        📚
+      </div>
+
+      <h3>
+        Course Registration
+      </h3>
+
+      <p>
+        Students can browse available courses and
+        register for their preferred training programs.
+      </p>
+
+    </div>
+
+
+    <!-- ASSESSMENT -->
+    <div class="feature-card">
+
+      <div class="feature-icon">
+        📝
+      </div>
+
+      <h3>
+        Online Assessment
+      </h3>
+
+      <p>
+        Students can access assessments, submit answers,
+        and view their grades.
+      </p>
+
+    </div>
+
+
+    <!-- TUTORIAL -->
+    <div class="feature-card">
+
+      <div class="feature-icon">
+        🎥
+      </div>
+
+      <h3>
+        Tutorial Access
+      </h3>
+
+      <p>
+        Students can access learning tutorials and
+        training materials provided by instructors.
+      </p>
+
+    </div>
+
+
+    <!-- GRADES -->
+    <div class="feature-card">
+
+      <div class="feature-icon">
+        📊
+      </div>
+
+      <h3>
+        Grade Management
+      </h3>
+
+      <p>
+        Instructors can submit grades while students
+        can view their academic performance.
+      </p>
+
+    </div>
+
+
+    <!-- CERTIFICATE -->
+    <div class="feature-card">
+
+      <div class="feature-icon">
+        🏆
+      </div>
+
+      <h3>
+        Certificates
+      </h3>
+
+      <p>
+        Track successful training completion and
+        manage certificates efficiently.
+      </p>
+
+    </div>
+
+
+    <!-- ANALYTICS -->
+    <div class="feature-card">
+
+      <div class="feature-icon">
+        📈
+      </div>
+
+      <h3>
+        Training Analytics
+      </h3>
+
+      <p>
+        Administrators can monitor courses, students,
+        instructors, assessments, and training results.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     HOW IT WORKS
+========================================================= -->
+
+<section class="section process-section">
+
+  <div class="section-heading">
+
+    <span>
+      HOW IT WORKS
+    </span>
+
+    <h2>
+      Simple Training Management Process
+    </h2>
+
+    <p>
+      TMS makes the training process easy for everyone.
+    </p>
+
+  </div>
+
+
+  <div class="process-grid">
+
+    <!-- STEP 1 -->
+    <div class="process-card">
+
+      <div class="process-number">
+        01
+      </div>
+
+      <h3>
+        Register
+      </h3>
+
+      <p>
+        Create your account and access the training
+        management platform.
+      </p>
+
+    </div>
+
+
+    <!-- STEP 2 -->
+    <div class="process-card">
+
+      <div class="process-number">
+        02
+      </div>
+
+      <h3>
+        Select Course
+      </h3>
+
+      <p>
+        Browse available courses and register for
+        your preferred training program.
+      </p>
+
+    </div>
+
+
+    <!-- STEP 3 -->
+    <div class="process-card">
+
+      <div class="process-number">
+        03
+      </div>
+
+      <h3>
+        Learn & Assess
+      </h3>
+
+      <p>
+        Access tutorials, complete assessments,
+        and monitor your learning progress.
+      </p>
+
+    </div>
+
+
+    <!-- STEP 4 -->
+    <div class="process-card">
+
+      <div class="process-number">
+        04
+      </div>
+
+      <h3>
+        Complete
+      </h3>
+
+      <p>
+        Complete your training and receive your
+        results and certificates.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CONTACT SECTION
+========================================================= -->
+
+<section
+  id="contact"
+  class="section contact-section">
+
+  <div class="section-heading">
+
+    <span>
+      CONTACT US
+    </span>
+
+    <h2>
+      We'd Love to Hear From You
+    </h2>
+
+    <p>
+      Have a question about our Training Management System?
+      Contact us and our team will be happy to help.
+    </p>
+
+  </div>
+
+
+  <div class="contact-grid">
+
+    <!-- CONTACT INFORMATION -->
+    <div class="contact-info">
+
+      <div class="contact-item">
+
+        <div class="contact-icon">
+          📧
+        </div>
+
+        <div>
+
+          <h3>
+            Email
+          </h3>
+
+          <p>
+            info@tms.com
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="contact-item">
+
+        <div class="contact-icon">
+          📞
+        </div>
+
+        <div>
+
+          <h3>
+            Phone
+          </h3>
+
+          <p>
+            +251 900 000 000
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="contact-item">
+
+        <div class="contact-icon">
+          📍
+        </div>
+
+        <div>
+
+          <h3>
+            Location
+          </h3>
+
+          <p>
+            Addis Ababa, Ethiopia
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- CONTACT FORM -->
+    <div class="contact-form">
+
+      <input
+        type="text"
+        placeholder="Your Name">
+
+
+      <input
+        type="email"
+        placeholder="Your Email">
+
+
+      <textarea
+        rows="6"
+        placeholder="Your Message">
+      </textarea>
+
+
+      <button
+        type="button">
+
+        Send Message
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     SIGN UP CTA
+========================================================= -->
+
+<section class="signup-section">
+
+  <div class="signup-content">
+
+    <span>
+      START YOUR JOURNEY
+    </span>
+
+    <h2>
+      Ready to Start Learning?
+    </h2>
+
+    <p>
+      Create your account and start managing your
+      training experience today.
+    </p>
+
+  </div>
+
+
+  <a
+    routerLink="/signup"
+    class="cta-button">
+
+    Create Account →
+
+  </a>
+
+</section>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+  <div class="footer-content">
+
+    <!-- BRAND -->
+    <div class="footer-brand">
+
+      <div class="footer-logo">
+
+        <span class="logo-icon">
+          T
+        </span>
+
+        <span>
+          TMS
+        </span>
+
+      </div>
+
+      <p>
+        Training Management System
+      </p>
+
+      <p class="footer-description">
+        A modern platform for managing courses,
+        training, assessments, instructors, and students.
+      </p>
+
+    </div>
+
+
+    <!-- FOOTER LINKS -->
+    <div class="footer-column">
+
+      <h3>
+        Quick Links
+      </h3>
+
+      <a routerLink="/home">
+        Home
+      </a>
+
+      <a routerLink="/about">
+        About Us
+      </a>
+
+      <a routerLink="/mission">
+        Mission
+      </a>
+
+      <a routerLink="/vision">
+        Vision
+      </a>
+
+      <a routerLink="/values">
+        Values
+      </a>
+
+    </div>
+
+
+    <!-- ACCOUNT -->
+    <div class="footer-column">
+
+      <h3>
+        Account
+      </h3>
+
+      <a routerLink="/signup">
+        Sign Up
+      </a>
+
+      <a routerLink="/login">
+        Login
+      </a>
+
+      <a href="#contact">
+        Contact Us
+      </a>
+
+    </div>
+
+
+    <!-- SYSTEM -->
+    <div class="footer-column">
+
+      <h3>
+        TMS
+      </h3>
+
+      <p>
+        Student Dashboard
+      </p>
+
+      <p>
+        Instructor Dashboard
+      </p>
+
+      <p>
+        Admin Dashboard
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <!-- FOOTER BOTTOM -->
+  <div class="footer-bottom">
+
+    <p>
+      © {{ currentYear }}
+      Training Management System.
+      All rights reserved.
+    </p>
+
+  </div>
+
+</footer>
